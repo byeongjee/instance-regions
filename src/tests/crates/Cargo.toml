@@ -1,0 +1,80 @@
+# The crates `crates.rs` analyzes, at the versions its tests expect. `cargo fetch` on this
+# manifest puts their sources in the local cargo registry.
+[package]
+name = "crates-under-test"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[lib]
+path = "lib.rs"
+
+[workspace]
+
+[dependencies]
+aho-corasick = { version = "=1.1.5", default-features = false }
+allocator-api2 = { version = "=0.2.21", default-features = false }
+anes = { version = "=0.1.6", default-features = false }
+anstyle = { version = "=1.0.14", default-features = false }
+anstyle-parse = { version = "=1.0.0", default-features = false }
+autocfg = { version = "=1.5.1", default-features = false }
+base64 = { version = "=0.13.1", default-features = false }
+bit-vec = { version = "=0.8.0", default-features = false }
+bitflags = { version = "=2.13.1", default-features = false }
+bumpalo = { version = "=3.20.3", default-features = false }
+bytemuck = { version = "=1.25.2", default-features = false }
+byteorder = { version = "=1.5.0", default-features = false }
+cast = { version = "=0.3.0", default-features = false }
+ciborium-io = { version = "=0.2.2", default-features = false }
+clap_lex = { version = "=1.1.0", default-features = false }
+colorchoice = { version = "=1.0.5", default-features = false }
+daachorse = { version = "=1.0.1", default-features = false }
+dary_heap = { version = "=0.3.9", default-features = false }
+either = { version = "=1.17.0", default-features = false }
+encode_unicode = { version = "=1.0.0", default-features = false }
+escape8259 = { version = "=0.5.4", default-features = false }
+fastrand = { version = "=2.5.0", default-features = false }
+find-msvc-tools = { version = "=0.1.10", default-features = false }
+fnv = { version = "=1.0.7", default-features = false }
+foldhash = { version = "=0.2.0", default-features = false }
+futures-core = { version = "=0.3.34", default-features = false }
+futures-task = { version = "=0.3.34", default-features = false }
+hashbrown = { version = "=0.17.1", default-features = false }
+heck = { version = "=0.5.0", default-features = false }
+hermit-abi = { version = "=0.5.3", default-features = false }
+html-escape = { version = "=0.2.15", default-features = false }
+ident_case = { version = "=1.0.1", default-features = false }
+index_vec = { version = "=0.1.4", default-features = false }
+is_terminal_polyfill = { version = "=1.70.2", default-features = false }
+itoa = { version = "=1.0.18", default-features = false }
+linux-raw-sys = { version = "=0.12.1", default-features = false }
+litemap = { version = "=0.8.3", default-features = false }
+log = { version = "=0.4.33", default-features = false }
+memchr = { version = "=2.8.3", default-features = false }
+minimal-lexical = { version = "=0.2.1", default-features = false }
+once_cell = { version = "=1.21.4", default-features = false }
+oorandom = { version = "=11.1.5", default-features = false }
+pkg-config = { version = "=0.3.33", default-features = false }
+potential_utf = { version = "=0.1.6", default-features = false }
+r-efi = { version = "=6.0.0", default-features = false }
+rand_core = { version = "=0.10.1", default-features = false }
+regex-automata = { version = "=0.4.18", default-features = false }
+regex-syntax = { version = "=0.8.11", default-features = false }
+rustc-hash = { version = "=2.1.3", default-features = false }
+ryu = { version = "=1.0.23", default-features = false }
+scopeguard = { version = "=1.2.0", default-features = false }
+shlex = { version = "=2.0.1", default-features = false }
+slab = { version = "=0.4.12", default-features = false }
+smallvec = { version = "=1.15.2", default-features = false }
+smawk = { version = "=0.3.3", default-features = false }
+strsim = { version = "=0.11.1", default-features = false }
+textwrap = { version = "=0.16.4", default-features = false }
+tracing-core = { version = "=0.1.36", default-features = false }
+unicode-ident = { version = "=1.0.24", default-features = false }
+unicode-segmentation = { version = "=1.13.3", default-features = false }
+unicode-width = { version = "=0.2.2", default-features = false }
+unicode_categories = { version = "=0.1.1", default-features = false }
+unit-prefix = { version = "=0.5.2", default-features = false }
+utf8_iter = { version = "=1.0.4", default-features = false }
+utf8parse = { version = "=0.2.2", default-features = false }
+uuid = { version = "=1.24.0", default-features = false }
