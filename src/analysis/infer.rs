@@ -5,10 +5,13 @@ use std::ops::Deref;
 use rustc_hir::def_id::DefId;
 use rustc_infer::infer::canonical::{QueryRegionConstraints, query_response};
 use rustc_infer::infer::region_constraints::RegionConstraintData;
-use rustc_infer::infer::{InferCtxt, TyCtxtInferExt, TypeOutlivesConstraint};
+use rustc_infer::infer::{
+    InferCtxt, NllRegionVariableOrigin, TyCtxtInferExt, TypeOutlivesConstraint,
+};
 use rustc_middle::traits::ObligationCause;
 use rustc_middle::ty::{
-    ArgOutlivesPredicate, ParamEnv, ParamEnvAnd, TyCtxt, TypeFoldable, TypeVisitableExt, TypingMode,
+    ArgOutlivesPredicate, ParamEnv, ParamEnvAnd, TyCtxt, TypeFoldable, TypeVisitableExt,
+    TypingMode, fold_regions,
 };
 use rustc_span::Span;
 use rustc_trait_selection::solve::NoSolution;
@@ -135,6 +138,18 @@ impl<'tcx> Infer<'tcx> {
             return Err(());
         };
         let value: R = self.infcx.resolve_vars_if_possible(value);
+        // Under `TypingMode::PostAnalysis`, normalizing reveals an opaque type as the
+        // hidden type rustc stored, in which the regions of a closure's parent args
+        // that the opaque does not capture are erased. Such a region is no universal
+        // region of this body, so it becomes a fresh existential variable, as every
+        // region of the MIR does when the body is renumbered.
+        let value: R = fold_regions(self.tcx, value, |region, _| {
+            if region.is_erased() {
+                self.infcx.next_nll_region_var(NllRegionVariableOrigin::Existential { name: None })
+            } else {
+                region
+            }
+        });
         let obligations: Vec<TypeOutlivesConstraint<'tcx>> =
             self.infcx.take_registered_region_obligations();
         let assumptions: Vec<ArgOutlivesPredicate<'tcx>> =
