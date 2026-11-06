@@ -6,11 +6,11 @@ description = "region constraints of the MIR of a monomorphized instance"
 license = "MIT OR Apache-2.0"
 
 [dependencies]
-preborrowck-mir = { git = "https://github.com/byeongjee/preborrowck-mir.git", rev = "bae794c6437b63a562dc4d86a35c46d4846e5e82" }
+preborrowck-mir = { git = "https://github.com/byeongjee/preborrowck-mir.git", rev = "407126d20341358451427af4602966cc57b909b5" }
 rustc_utils = "=0.15.0-nightly-2026-05-01"
 
 [dev-dependencies]
-preborrowck-mir = { git = "https://github.com/byeongjee/preborrowck-mir.git", rev = "bae794c6437b63a562dc4d86a35c46d4846e5e82", features = ["test"] }
+preborrowck-mir = { git = "https://github.com/byeongjee/preborrowck-mir.git", rev = "407126d20341358451427af4602966cc57b909b5", features = ["test"] }
 
 [package.metadata.rust-analyzer]
 rustc_private = true
